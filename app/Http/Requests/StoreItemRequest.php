@@ -24,7 +24,18 @@ class StoreItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:50'],
+            'memo' => ['required', 'max:255'],
+            'price' => ['required', 'numeric'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => '商品名',
+            'memo' => '本文',
+            'price' => '価格'
         ];
     }
 }
