@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError.vue';
 import { Head } from '@inertiajs/vue3';
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
+import { Core as YubinBangoCore } from "yubinbango-core2";
 
 defineProps({
   errors: Object
@@ -20,6 +21,13 @@ const form = reactive({
     gender: null, 
     memo: null
 })
+
+const fetchAddress = () => {
+  new YubinBangoCore(String(form.postcode), (value) => {
+    // console.log(value)
+    form.address = value.region + value.locality + value.street
+  })
+}
 
 const storeCustomer = () => {
   Inertia.post('/customers', form)
