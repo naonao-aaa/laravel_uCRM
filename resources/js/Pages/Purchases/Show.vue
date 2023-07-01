@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { onMounted, reactive, ref, computed } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import dayjs from 'dayjs'
@@ -108,8 +108,8 @@ onMounted(() => {
                                   </div>
                                 </div>
 
-                                <div class="p-2 w-full">
-                                  <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">登録する</button>
+                                <div v-if="props.order[0].status == true" class="p-2 w-full">     <!-- キャンセル済みのものを編集することは無いと思うので、v-ifで条件分岐した-->
+                                  <Link as="button" :href="route('purchases.edit', { purchase: props.order[0].id })" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</Link>
                                 </div>
 
                               </div>
