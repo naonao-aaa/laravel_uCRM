@@ -41,7 +41,7 @@ const totalPrice = computed(() => {
   return total
 })
 
-const storePurchase = () => {
+const updatePurchase = id => {
   itemList.value.forEach( item => {
     if( item.quantity > 0){
       form.items.push({
@@ -50,7 +50,7 @@ const storePurchase = () => {
       })
     }
   })
-  Inertia.post(route('purchases.store'), form )
+  Inertia.put(route('purchases.update', { purchase: id }), form )
 }
 
 const quantity = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"] 
@@ -72,7 +72,7 @@ const quantity = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
                     <div class="p-6 bg-white border-b border-gray-200">
 
                         <section class="text-gray-600 body-font relative">
-                          <form @submit.prevent="storePurchase">
+                          <form @submit.prevent="updatePurchase(form.id)">
                             <div class="container px-5 py-8 mx-auto">
 
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
