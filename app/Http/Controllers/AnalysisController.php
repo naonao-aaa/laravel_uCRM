@@ -19,7 +19,7 @@ class AnalysisController extends Controller
         ->orderBy('created_at')
         ->paginate(50);
 
-        dd($period);
+        // dd($period);
 
         return Inertia::render('Analysis');
     }
